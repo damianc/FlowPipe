@@ -71,7 +71,7 @@ var res = flow('ABC')
 // res = 'ABC'
 ```
 
-When it comes to the other, it can't ba said so:
+When it comes to the other, it can't be said so:
 
 ```
 var res = flow('CBA')
@@ -99,3 +99,8 @@ flow('/api/url')
 	.get();
 ```
 
+```
+flow(promise).
+	.pipe(flow.$.id + ': ' + flow.$.name)
+	.get();
+```
