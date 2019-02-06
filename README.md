@@ -40,9 +40,10 @@ console.log(num.get());								// 256
 
 ```
 var arr = flow(['a', 'b', 'c', 'd'])
-	.pipe(Array.prototype.pop, {this: flow.$}, flow.$orig);
+	.pipe(Array.prototype.pop, {this: flow.$}, flow.$orig)
+	.pipe(Array.prototype.reverse, {this: flow.$});
 
-console.log(arr.get());						// ['a', 'b', 'c']
+console.log(arr.get());						// ['c', 'b', 'a']
 ```
 
 Here, if we would not use `flow.$orig`, we would get the value `d`. It is because `pop()` method returns a deleted item of an array. We want to get the original value passed to `pipe()` (after it has been processed).
