@@ -33,7 +33,7 @@ var num = flow(-5)
 	.pipe(Math.pow, 2)							// 16
 	.pipe(Math.pow, {args: [flow.$, 2]});					// 256
 
-console.log(num.get());										// 256
+console.log(num.get());									// 256
 ```
 
 ### processing an array
