@@ -21,6 +21,7 @@ The method can take following combinations of arguments:
 * *(function, extraArg1, ..., extraArgN)* - similar to the previous + passes extra arguments to the function
 * *(function, callSpec)* - *callSpec* is a object that can have *this*, *args* or both properties to define a context for the function call and an array of the arguments to pass (the current value can be passed by *flow.$*)
 * *(..., flow.$orig)* - to any of the above, *flow.$orig* can be passed as a last argument to return the processed value instead of a result of an operation on it
+* *(..., flow.$both)* - similar to *flow.$orig*, but returns an array containing both modified and original value
 
 Let's take a look at a couple of examples:
 
