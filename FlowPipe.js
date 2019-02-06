@@ -12,8 +12,12 @@ class FlowingValue {
                     return function (input, ...args) {
                         var res;
                         var lastArg = args[args.length-1];
-                        var returnOrig = false;
-                        if (lastArg === flow.$orig) returnOrig = true;
+                        var returnOrig = false, returnBoth = false;
+                        if (lastArg === flow.$orig) {
+                            returnOrig = true;
+                        } else if (lastArg === flow.$both) {
+                            returnBoth = true;
+                        }
 
                         function isFunctionCallSpec(obj) {
                             var propNum = Object.keys(obj).length;
@@ -38,7 +42,9 @@ class FlowingValue {
                             res = input;
                         }
 
-                        var newFlowing = returnOrig ? val : res;
+                        var newFlowing = res;
+                        if (returnOrig) newFlowing = val;
+                        if (returnBoth) newFlowing = [res, val];
                         return new FlowingValue(newFlowing);
                     };
                 }
@@ -54,4 +60,5 @@ function flow(val) {
 }
 
 flow.$ = undefined;
-flow.$orig = 0x0100;
+flow.$orig = Symbol('FlowReturnOrigValue');
+flow.$both = Symbol('FlowReturnBothValues');

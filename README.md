@@ -108,3 +108,17 @@ flow(promise)
 	.pipe(flow.$.id + ': ' + flow.$.name)
 	.get();
 ```
+
+## Getting both original and modified value
+
+In the examples above, we have used `$.orig` to get the original value rather than the processed one. We may want to get both. Then, the last argument of `pipe()` method should be `$.both`. What will be returned is an array `[modifiedValue, originalValue]`.
+
+```
+var res = flow([1, 2, 3])
+	.pipe(Array.prototype.reduce, {this: flow.$, args: [(a, b) => a + b, 0]}, flow.$both)
+	.pipe({items: flow.$[1], sum: flow.$[0]})
+	.get();
+
+console.log(res);
+// {items: [1, 2, 3], sum: 6}
+```
