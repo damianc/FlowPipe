@@ -1,7 +1,7 @@
 # FlowPipe
 
 FlowPipe works somewhat like the pipeline operator `|>`.
-To make a value flowable, call `flow()` passing the value as first argument. Then, to indicate a value being processed, use `flow.$` as an argument of `pipe()` method. Finally value can be accessed by the call of `get()`.
+To make a value flowable, call `flow()` passing the value as the first argument. Then, to indicate a value being processed, use `flow.$` as an argument of `pipe()` method. Final value can be accessed by the call of `get()`.
 
 ```
 function uppercase(str) {
@@ -100,7 +100,8 @@ flow('/api/url')
 ```
 
 ```
-flow(promise).
+flow(promise)
+	.pipe(await flow.$)
 	.pipe(flow.$.id + ': ' + flow.$.name)
 	.get();
 ```
