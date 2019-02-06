@@ -31,7 +31,7 @@ var num = flow(-5)
 	.pipe(flow.$ + 1)							// -4
 	.pipe(Math.abs)								// 4
 	.pipe(Math.pow, 2)							// 16
-	.pipe(Math.pow, {args: [flow.$, 2]});			// 256
+	.pipe(Math.pow, {args: [flow.$, 2]});					// 256
 
 console.log(num.get());							// 256
 ```
