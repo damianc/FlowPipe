@@ -55,11 +55,3 @@ function flow(val) {
 
 flow.$ = undefined;
 flow.$orig = 0x0100;
-
-/*
-if (input instanceof Promise) {
-    res = new Promise((_) => _(input));
-} else {
-    res = input;
-}
-*/
