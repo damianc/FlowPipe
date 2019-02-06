@@ -97,7 +97,7 @@ flow('/api/url')
 		data: someData
 	}))
 	.pipe(flow.$ + 1)
-	.pipe((_) => new Item(_))
+	.pipe(new Item(flow.$))
 	.pipe(flow.$.id)
 	.get();
 ```
