@@ -45,7 +45,7 @@ var arr = flow(['a', 'b', 'c', 'd'])
 console.log(arr.get());						// ['a', 'b', 'c']
 ```
 
-Here, if we would not use `flow.$orig`, we would get the value `d`. It is because `pop()` method returns a deleted item of an array. We want to get the original value passed to `pipe()` after it has been processed.
+Here, if we would not use `flow.$orig`, we would get the value `d`. It is because `pop()` method returns a deleted item of an array. We want to get the original value passed to `pipe()` (after it has been processed).
 
 ### processing an object
 
@@ -56,6 +56,8 @@ var obj = flow({a: 1})
 
 console.log(obj.get());					// {b: 2}
 ```
+
+`flow.$orig` has been used because of the same reason as in the case of the above array - `delete` operator returns `true`, but we want to process the original value, i.e., the object.
 
 ## Throwing an exception when processing
 
