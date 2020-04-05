@@ -9,7 +9,7 @@ function uppercase(str) {
 }
 
 var str = flow('john').pipe(uppercase).pipe(flow.$ + '!');
-console.log(str.get());		// JOHN!
+console.log(str.get());    // JOHN!
 ```
 
 ## `pipe()` method
@@ -28,15 +28,19 @@ Let's take a look at a couple of examples:
 ### processing a number
 
 ```
-var num = flow(-5)
+var num = flow(-3)
 	.pipe(flow.$ + 1)
-	// -4
+	// -2
 	.pipe(Math.abs)
-	// 4
+	// 2
 	.pipe(Math.pow, 2)
+	// 4
+	.pipe(
+		Math.pow, {
+			args: [2, flow.$]
+		}
+	);
 	// 16
-	.pipe(Math.pow, {args: [flow.$, 2]});
-	// 256
 
 console.log(num.get());
 // 256
