@@ -29,22 +29,35 @@ Let's take a look at a couple of examples:
 
 ```
 var num = flow(-5)
-	.pipe(flow.$ + 1)							// -4
-	.pipe(Math.abs)								// 4
-	.pipe(Math.pow, 2)							// 16
-	.pipe(Math.pow, {args: [flow.$, 2]});					// 256
+	.pipe(flow.$ + 1)
+	// -4
+	.pipe(Math.abs)
+	// 4
+	.pipe(Math.pow, 2)
+	// 16
+	.pipe(Math.pow, {args: [flow.$, 2]});
+	// 256
 
-console.log(num.get());								// 256
+console.log(num.get());
+// 256
 ```
 
 ### processing an array
 
 ```
 var arr = flow(['a', 'b', 'c', 'd'])
-	.pipe(Array.prototype.pop, {this: flow.$}, flow.$orig)
-	.pipe(Array.prototype.reverse, {this: flow.$});
+	.pipe(
+		Array.prototype.pop,
+		{ this: flow.$ },
+		flow.$orig
+	)
+	.pipe(
+		Array.prototype.reverse,
+		{ this: flow.$ }
+	);
 
-console.log(arr.get());						// ['c', 'b', 'a']
+console.log(arr.get());
+// ['c', 'b', 'a']
 ```
 
 Here, if we would not use `flow.$orig`, we would get the value `d`. It is because `pop()` method returns a deleted item of an array. We want to get the original value passed to `pipe()` (after it has been processed).
@@ -53,10 +66,17 @@ Here, if we would not use `flow.$orig`, we would get the value `d`. It is becaus
 
 ```
 var obj = flow({a: 1})
-	.pipe(Object.assign, {b: 2})
-	.pipe(delete flow.$.a, flow.$orig);
+	.pipe(
+		Object.assign,
+		{ b: 2}
+	)
+	.pipe(
+		delete flow.$.a,
+		flow.$orig
+	);
 
-console.log(obj.get());					// {b: 2}
+console.log(obj.get());
+// {b: 2}
 ```
 
 `flow.$orig` has been used because of the same reason as in the case of the above array - `delete` operator returns `true`, but we want to process the original value, i.e., the object.
@@ -116,8 +136,21 @@ In the examples above, we have used `$.orig` to get the original value rather th
 
 ```
 var res = flow([1, 2, 3])
-	.pipe(Array.prototype.reduce, {this: flow.$, args: [(a, b) => a + b, 0]}, flow.$both)
-	.pipe({items: flow.$[1], sum: flow.$[0]})
+	.pipe(
+		Array.prototype.reduce,
+		{
+			this: flow.$,
+			args: [
+				(a, b) => a + b,
+				0
+			]
+		},
+		flow.$both
+	)
+	.pipe({
+		items: flow.$[1],
+		sum: flow.$[0]
+	})
 	.get();
 
 console.log(res);
