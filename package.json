@@ -1,5 +1,5 @@
 {
-  "name": "flowpipe",
+  "name": "flowpipejs",
   "version": "1.0.1",
   "description": "FlowPipe works somewhat like the pipeline operator `|>`.\r To make a value flowable, call `flow()` passing the value as the first argument. Then, to indicate a value being processed, use `flow.$` as an argument of `pipe()` method. Final value can be accessed by the call of `get()`.",
   "main": "FlowPipe.js",
